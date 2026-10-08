@@ -18,3 +18,6 @@ frontrun:
 # Check the backend has intiated correctly
 health address=default_address:
   curl -fsS '{{address}}/health'
+
+test:
+  cd backend && uv run pytest
