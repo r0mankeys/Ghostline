@@ -1,11 +1,13 @@
-import { useState } from 'react'
+// Vite fills import.meta.env from the root .env (see envDir in vite.config.ts).
+// Only VITE_-prefixed variables are visible here.
+const API_URL = import.meta.env.VITE_API_URL
 
 function App() {
-  const [count, setCount] = useState(0)
+  console.log(`This is the API URL: ${API_URL}`)
 
   return (
     <>
-<h1>Hello World</h1>
+      <form></form>
     </>
   )
 }
