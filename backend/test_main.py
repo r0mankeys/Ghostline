@@ -29,6 +29,9 @@ def make_upload(content_type: str | None) -> UploadFile:
         ("image/png", True),
         ("image/jpeg", True),
         ("text/plain", False),
+        ("audio/aac", False),
+        ("video/x-msvideo", False),
+        ("font/otf", False),
         ("application/x-image-editor", False),  # the case the regex let through
         (None, False),  # client sent no content type at all
     ],
