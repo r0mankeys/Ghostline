@@ -1,10 +1,12 @@
 import uvicorn
 import os
-from typing import Annotated
-from fastapi import FastAPI, File, UploadFile, status
-from pydantic import BaseModel
+from fastapi import FastAPI, File, UploadFile, status, Response
 
 app = FastAPI()
+
+# A function that checks if the file type uploaded is an image, returns a Boolean value
+def image_check(file: UploadFile):
+    return file.content_type.startswith("image/")
 
 @app.get("/health", status_code=status.HTTP_200_OK)
 async def health():
@@ -15,8 +17,12 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/submissions")
-async def create_image(file: UploadFile): 
-    return { "file": file.filename, "size": file.size }
+async def create_image(file: UploadFile, response: Response): 
+    if image_check(file):
+        return {"file": file.filename, "size": file.size}
+    else:
+        response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+        return {"error": "Must upload an image"}
 
 if __name__ == "__main__":
     host = os.getenv("API_HOST", "127.0.0.1")
