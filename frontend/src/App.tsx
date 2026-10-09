@@ -13,7 +13,10 @@ function App() {
     const form = e.target;
     const formData = new FormData(form);
     try {
-      const response = await fetch(`${API_URL}/submissions`);
+      const response = await fetch(`${API_URL}/submissions`, {
+        method: "POST",
+        body: formData
+      });
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
@@ -27,7 +30,7 @@ function App() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="file" id="img_upload" name="img_upload" accept={ACCEPTABLE_FILE_TYPES}></input>
+        <input type="file" id="img_upload" name="file" accept={ACCEPTABLE_FILE_TYPES}></input>
         <button type="submit">Submit</button>
       </form>
     </>

@@ -9,8 +9,7 @@ from main import app, image_check
 
 client = TestClient(app)
 
-# A few bytes that start like a real PNG. The endpoint only checks the
-# declared content type, so the rest doesn't need to be a valid image.
+# A few bytes that start like a real PNG. The endpoint only checks the declared content type, so the rest doesn't need to be a valid image.
 PNG_BYTES = b"\x89PNG\r\n\x1a\n" + b"\x00" * 100
 
 
